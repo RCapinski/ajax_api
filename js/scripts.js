@@ -11,9 +11,13 @@ function getJoke() {
   xhr.open('GET', url);
   xhr.addEventListener('load', function() {
     var response = JSON.parse(xhr.response);
+    if (!response || !response.value || !response.value.joke) {
+      alert('Joke could not be loaded!');
+      return null;
+    };
     paragraph.innerHTML = response.value.joke;
   });
   xhr.send();
 };
 
-document.onload(getJoke());
+document.onload = getJoke();
